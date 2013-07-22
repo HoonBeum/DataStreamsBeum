@@ -1,0 +1,173 @@
+public abstract class PizzaStore {
+ //추상 메소드. 서브클래스에서 구체화한다.
+    protected abstract Pizza createPizza(String type);
+
+    public Pizza orderPizza(String ts) {
+
+        Pizza pizza = createPizza(ts);
+
+        pizza.prepare();
+
+        pizza.bake();
+
+        pizza.cut();
+
+        pizza.box();
+
+        return pizza;
+
+    }
+
+}
+
+
+--------------------------------------------------------------
+
+
+public class NYPizzaFactory extends PizzaStore {
+
+ @Override
+    protected Pizza createPizza(String type){
+
+        if(type.equals("cheese")){
+
+            return new NYStyleCheesePizza();
+
+        } else if (type.equals("veggie")){
+
+            return new NYStyleVeggiePizza();
+
+        } else {
+   return null;
+  }
+
+    }
+
+}
+
+
+----------------------------------------------------------------
+
+
+public class LAPizzaFactory extends PizzaStore {
+
+ @Override
+    protected Pizza createPizza(String type){
+
+        if(type.equals("cheese")){
+
+            return new LAStyleCheesePizza();
+
+        } else if (type.equals("basic")){
+
+            return new LAStyleBasicPizza();
+
+        } else {
+   return null;
+  }
+
+    }
+
+}
+
+
+-----------------------------------------------------------------
+
+
+public class Pizza {
+ protected String name;
+ protected String dough;
+ protected String sauce;
+    
+ public void prepare() {
+  System.out.println("----------------------------------");
+  System.out.println(this.name + "를 준비중입니다.");
+  System.out.println(this.dough + "도우 반죽중...");
+  System.out.println(this.sauce + "소스 추가중...");
+  System.out.println("----------------------------------");
+ }
+
+ public void bake() {
+  System.out.println(this.name + "피자를 굽습니다.");
+ }
+
+ public void cut() {
+  System.out.println(this.name + "피자를 자릅니다.");
+ }
+
+ public void box() {
+  System.out.println(this.name + "피자를 포장합니다.");
+ }
+ 
+
+}
+
+
+---------------------------------------------------------------
+
+
+public class NYStyleCheesePizza extends Pizza {
+ public NYStyleCheesePizza(){
+     name = "치즈피자";
+     dough = "크러스트";
+     sauce = "마리나라";
+    }
+}
+
+
+---------------------------------------------------------------
+
+
+public class NYStyleVeggiePizza extends Pizza {
+  public NYStyleVeggiePizza(){
+     name = "베기피자";
+     dough = "크러스트";
+     sauce = "토마토";
+    }
+}
+
+
+
+-----------------------------------------------------------------
+
+
+public class LAStyleCheesePizza extends Pizza {
+  public LAStyleCheesePizza(){
+     name = "치즈피자";
+     dough = "쌀";
+     sauce = "핫";
+    }
+}
+
+
+
+-----------------------------------------------------------------
+
+
+
+public class LAStyleBasicPizza extends Pizza {
+  public LAStyleBasicPizza(){
+     name = "일반피자";
+     dough = "일반";
+     sauce = "토마토";
+    }
+}
+
+
+
+-----------------------------------------------------------------
+
+
+
+public class Main
+{
+    public static void main(String[] args){
+        PizzaStore pizzaType1 = new NYPizzaFactory();
+        PizzaStore pizzaType2 = new LAPizzaFactory();
+        
+        pizzaType1.orderPizza("cheese");
+        pizzaType2.orderPizza("basic");
+        
+
+    }
+}
