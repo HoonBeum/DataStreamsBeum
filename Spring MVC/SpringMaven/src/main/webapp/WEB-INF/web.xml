@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" metadata-complete="true" version="3.0">
+  
+  
+  	<listener>
+		<listener-class>com.example.controller.listener</listener-class>
+	</listener>
+	<context-param>
+		<param-name>springConfig</param-name>
+		<param-value>C:\Program Files\Apache Software Foundation\Tomcat 7.0\webapps\SpringMaven\src\main\webapp\WEB-INF\springConfig.xml</param-value>
+	</context-param>
+
+  <servlet>
+    <servlet-name>test-servlet</servlet-name>
+    <servlet-class>TestServletServer</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>test-JoinUser</servlet-name>
+    <servlet-class>com.example.controller.TableManager</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>test-servlet</servlet-name>
+    <url-pattern>/test</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>test-JoinUser</servlet-name>
+    <url-pattern>/JoinUser</url-pattern>
+  </servlet-mapping>
+  
+  <filter>
+    <filter-name>test-filter</filter-name>
+    <filter-class>com.example.controller.Check</filter-class>
+    <init-param>
+    	<param-name>LogFileName</param-name>
+    	<param-value>UserLog.txt</param-value>
+    </init-param>  	
+  </filter>
+  <filter-mapping>
+    <filter-name>test-filter</filter-name>
+    <url-pattern>/*</url-pattern>
+    
+  </filter-mapping>
+  
+</web-app>
